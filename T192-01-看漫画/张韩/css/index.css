@@ -1,0 +1,163 @@
+
+
+#rotation{
+
+	/* 超出边框不显示 */
+	overflow-y: hidden;
+	margin-top: 10px;
+	height: 340px;
+	background-image: url(../img/home/rotation/108259.jpg-noresize.webp);
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* border-radius: 0px 0px 40px 40px; */
+}
+
+#rotation-ul{
+
+	display: inline-block;
+	background-color: rgba(12, 12, 12, 0.8);
+	width: 240px;
+	height: 250px;
+	float: right;
+	margin-top: 100px;
+	margin-right: 100px;
+	padding-bottom: 20px;
+}
+
+#rotation-ul  a{
+		color: #FFFFFF;
+}
+#rotation-ul  li:hover a{
+	color:rgba(252,105,118);
+}
+#rotation-ul-div{
+	overflow-y: hidden;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 20px;
+}
+#rotation-ul-div:hover{
+	height: 40px;
+}
+#rotation img{
+	width: 250px;
+	height: 50px;
+	float: left;
+}
+#textType div{
+	display: inline-block;
+}
+.xiaoshiTu{
+	z-index: -1;
+	display: flex;
+	width: 40px;
+	height: 40px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	vertical-align:middle;
+}
+#textType{
+	display: block;
+	height: 50px;
+	font-size: 18px;
+	z-index: -1;
+}
+.aType-red a:hover{
+	color:rgba(252,105,118);
+}
+#textType a{
+	margin-left: 10px;
+}
+.icon-fun{
+	
+	float: right;
+}
+.icon-fun a{
+	color: rgb(165, 165, 165);
+}
+.icon-fun div{
+	width: 40px;
+	height: 40px;
+	background-image: url(../img/home/icon/icon-1.png);
+	transform: rotate(90deg);
+	background-size: contain;
+		vertical-align:middle;
+}
+.icon-fun:hover div{
+	background-image: url(../img/home/icon/icon-3.png);
+}
+.icon-fun:hover a{
+	color:rgba(252,105,118);
+}
+#lookBody-imger{
+	background-image: url(../img/home/icon/cloud-line.png);
+	width: 100%;
+	margin-top: 5px;
+	height: 50px;
+	background-size: contain;
+	z-index: -1;
+}
+.imgText div{
+	display: inline-block;
+	vertical-align:middle;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	width: 40px;
+	height: 40px;
+}
+.imgText{
+	height: 80px;
+	padding-top: 20px;
+}
+.imgText span{
+	font-size: 24px;
+}
+.bookType{
+	display: inline-block;
+	width: 190px;
+	height: 300px;
+	margin: 0px 4px;
+	margin-bottom: 40px;
+}
+.bookType-img{
+
+	display:flex;
+	height: 240px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.bookType-img img{
+	z-index: -1;
+	width: 190px;
+	height: 250px;
+}
+.bookType:hover .bookType-img img{margin-top: -10px;}
+.bookType:hover .bookType-text a:hover{
+		color:rgba(252,105,118);
+}
+.ontTxt-show{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right:1em;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.bookType-text-span{
+	display: inline-block;
+	width: 20px;
+	float: right;
+	color:rgba(252,105,118);
+	margin-right: 7px;
+}
+
+/* .bookType:hover .bookType-show{
+	display:initial;
+}
+.bookType-show{
+	display: none;
+	width: 240px;
+	height: 360px;
+	float: left;
+	background-color: #000000;
+} */

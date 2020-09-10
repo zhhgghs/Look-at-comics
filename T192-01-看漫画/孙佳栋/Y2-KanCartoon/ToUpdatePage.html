@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>最新更新漫画 漫画大全 看漫画</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="css/ToUpdatePage.css" />		
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div id="Updateone">
+			<span style="color: rgb(153,153,153);">当前位置：</span>
+			<p>
+				<a href="#">看漫画</a>
+			</p>
+			<span>></span>
+			<p>
+				<a href="#">最新漫画更新</a>
+			</p>
+			<span>></span>
+		</div>
+		<div id="Updatetwo">
+			<p><img src="img/header-line-bg.png" /></p>
+		</div>
+		<div id="Updatethree">
+			<h4 style="color: rgb(252,105,118)">最新更新漫画</h4>
+		</div>
+
+		<div id="UpdateFour">
+			<div class="er" v-for="(item,index) in 50">
+				<div>
+					<p class="times">{{getdate()}}</p>
+					<p>
+						<a href="#">天下第一宠</a>
+					</p>
+					<span><a href="#">20话 这才是生活</a></span>
+				</div>
+				<div>
+					<p class="times">{{getdate()}}</p>
+					<p>
+						<a href="#">天下第一宠</a>
+					</p>
+					<span><a href="#">20话 这才是生活</a></span>
+				</div>
+				<div>
+					<p class="times">{{getdate()}}</p>
+					<p>
+						<a href="#">天下第一宠</a>
+					</p>
+					<span><a href="#">20话 这才是生活</a></span>
+				</div>
+				<div>
+					<p class="times">{{getdate()}}</p>
+					<p>
+						<a href="#">天下第一宠</a>
+					</p>
+					<span><a href="#">20话 这才是生活</a></span>
+				</div>
+			</div>
+		</div>
+		<div id="RightBottom">
+			<div class="tupiao"></div>
+			<div class="ErWeiMa"></div>
+			<div class="toggles"></div>
+			<div class="HuiDaoTop"></div>
+		</div>	
+		<div id="demo2"></div>
+	</body>
+
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/sjd.js"></script>
+	<script type="text/javascript" src="js/layui.js"></script>
+	<script>
+		//显示时间日期
+		var UpdateNowDate = new Vue({
+			el: '#UpdateFour',
+			data: {
+
+			},
+			methods: {
+				getdate: function() {
+					var date = new Date();
+					var month = date.getMonth() + 1;
+					var strDate = date.getDate();
+					if(month < 10) {
+						var month1 = "0" + month;
+					} else {
+						var month1 = month;
+					}
+					if(strDate < 10) {
+						var strDate1 = " / 0" + strDate;
+					} else {
+						var strDate1 = strDate;
+					}
+					return month1 + strDate1;
+				}
+			}
+		});
+		layui.use(['laypage', 'layer'], function() {
+				var laypage = layui.laypage,
+					layer = layui.layer;
+			//自定义样式
+				laypage.render({
+					elem: 'demo2',
+					count: 1000,
+					theme: '#FC6976'
+				});
+				//调用分页
+				laypage.render({
+					elem: 'demo20',
+					count: data.length,
+					jump: function(obj) {
+						//模拟渲染
+						document.getElementById('biuuu_city_list').innerHTML = function() {
+							var arr = [],
+								thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+							layui.each(thisData, function(index, item) {
+								arr.push('<li>' + item + '</li>');
+							});
+							return arr.join('');
+						}();
+					}
+				});
+			});
+	</script>
+
+</html>

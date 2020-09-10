@@ -1,0 +1,72 @@
+#titleTop{
+	line-height: 49px;
+}
+#titleTop>samp{
+	color: rgb(153, 153, 153);
+}
+#titleTop>a:nth-of-type(1){
+	color: rgb(102, 102, 102);
+}
+#titleTop>a:nth-of-type(2){
+	color: rgb(102, 102, 102);
+}
+#titleTop>a:nth-of-type(3){
+	color: rgb(102, 102, 102);
+}
+#titleTop>a:nth-of-type(4){
+	color: rgb(252, 105, 118);
+}
+#titleTop>a:hover{
+	color: rgb(252, 105, 118);
+	text-decoration: none;
+}
+#introd{
+	background: url(../img/person/1.jpg) no-repeat;
+	background-position: center;
+	background-size: cover;
+	height: 190px;
+	padding-top: 1%;
+}
+#introd>h1{
+	text-align: center;
+	font-size: 70px;
+	margin: 0px auto;
+	color: white;
+	font-weight: bold;
+}
+#nav{
+	list-style: none;
+	margin-left: 32%;
+	margin-top: 2.5%;
+}
+#nav>li{
+	float: left;
+	margin-left: 3%;
+}
+#nav>li>a{
+	font-size: 30px;
+	color: black;
+}
+#nav>li>a:hover{
+	text-decoration: none;
+	color: rgb(252, 105, 118);
+}
+#nav>p>a{
+	display: inline-block;
+	padding: 10px 22px;
+	border-radius: 18px;
+	background-color: rgb(255, 244, 244);
+	color: black;
+}
+#nav>p>a:hover{
+	text-decoration: none;
+}
+#nav>p>a:focus{
+	color: rgb(252, 105, 118);
+	text-decoration: none;
+}
+#nav>p:first-of-type{
+	float: left;
+	margin-left: 35%;
+	margin-right: 2%;
+}
