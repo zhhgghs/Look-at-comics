@@ -8,36 +8,13 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script src="navigationBar/vue.min.js"></script>
+			<script src="./navigationBar/navigationBar.js"></script>
 			<link rel="stylesheet" href="navigationBar/navigation.css"/>
-			<script src="navigationBar/navigationBar.js"></script>
 	</head>
-	<body >
+	<body style="position: static;width: 100%;">
 	<!-- 导航栏 -->
 		<div id="navigationBar">
-			<div id="navigations">
-				<div id="navigationBarImg">
-					<img src="./img/home/navigationBar/logo-kmh.png" />
-				</div>
-				<div id="navigationBarText">
-					<span><a href='#'>首页</a></span>
-					<span><a href='#'>更新</a></span>
-					<span><a href='#'>排行</a></span>
-					<span><a href='#'>分类</a></span>
-					<span><a href='#'>资讯</a></span>
-				</div>
-				<div id="navigationBarInput">
-					<input  type="text"/><button><img src="./img/home/navigationBar/QQ截图20200908215548.png"/></button>
-				</div>
-				<div id="navigationBarUser">
-					<img id="navigationBarUser-userImg" src="./img/home/navigationBar/visitor.png" >
-					<div id="navigationBarUser-text">
-						<span><a>书架</a></span>
-						<span><a>历史</a></span>
-						<span><a>下载app</a></span>
-					</div>
-				</div>
-			</div>
-			
+			<navigation-bar></navigation-bar>
 		</div>
 		<!-- 轮播图 -->
 		<div style="margin-top: 70px;" id="rotation" class="textFrot" >
@@ -54,7 +31,7 @@
 			</div>
 		</div>
 		<!-- 中间部分 -->
-		<div id="lookBody" style="margin-top: 30px; width: 1200px;position: absolute; margin-left:50%;  left:-600px; border: red 1px solid;">
+		<div id="lookBody" style=" width: 1200px;margin:0 auto;border: red 1px solid;margin-top: 30px;">
 				<!-- 全部分类 -->
 				<div id="textType" class="aType-red">
 					<div class="xiaoshiTu">
@@ -105,7 +82,7 @@
 												<a :href="txt.href"> {{txt.name}}</a>
 												<span class="bookType-text-span" style="font-size: 18px;">{{txt.fraction}}</span>
 											</div>
-											<span class="ontTxt-show" style="width: 200px;display: block;font-size: 12px;color: rgb(153,153,153);">{{txt.brief}}</span>
+											<span class="ontTxt-show" style="width: 200px;display: inline-block;font-size: 12px;color: rgb(153,153,153);">{{txt.brief}}</span>
 										</div>
 									</div>
 								</a>
@@ -430,6 +407,7 @@
 					
 				}
 			})
+			navigationBar()
 		</script>
 	</body>
 </html>

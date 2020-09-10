@@ -81,7 +81,7 @@
 	background-image: url(../img/home/icon/icon-1.png);
 	transform: rotate(90deg);
 	background-size: contain;
-		vertical-align:middle;
+	vertical-align:middle;
 }
 .icon-fun:hover div{
 	background-image: url(../img/home/icon/icon-3.png);
