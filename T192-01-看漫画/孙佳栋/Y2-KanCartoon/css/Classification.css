@@ -1,0 +1,124 @@
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			#Classone{
+				width: 90%;
+				margin: auto;
+				line-height: 3em;
+				font-size: 16px;
+			}
+			#Classone a{
+				color: rgb(102,102,102);
+			}
+			#Classone a:hover{
+				color: rgb(252,105,118);
+				text-decoration: none;
+			}
+			#Classone p{
+				display: inline-block;
+			}
+			
+			
+			
+			#Classtwo p{
+				margin-left: 80px;
+			}
+			#Classtwo p img{
+				width: 95%;
+			}
+			
+			
+			
+			#Classthree{
+				width: 90%;
+				margin: auto;				
+				box-shadow: rgb(252,105,118) 0px 0px 5px;			
+			}	
+			#Classthree dt{
+				display: inline-block;
+				font-size: 26px;
+				padding-left: 25px;	
+				padding-top: 15px;		
+				padding-bottom: 15px;
+			}
+			#Classthree .lastdt{
+				margin-bottom: 40px;
+			}
+			#Classthree dt a{
+				color: black;
+				text-decoration: none;
+			}
+			#Classthree span a{
+				color: #666666;
+				padding-left: 25px;
+				text-decoration: none;
+			}
+			
+			
+			.ClassFour div{
+				display: inline-block;
+				width: 14%;
+				margin-right: 14px;
+			}
+			.ClassFour h3{
+				margin-left: 83px;
+				margin-top: 40px;
+				margin-bottom: 40px;
+				font-size: 30px;
+				
+			}
+			.ClassFour .FirstPhoto{
+				margin-left: 83px;
+			}
+			.ClassFour img{
+				display:block;
+  				height: auto;
+  				max-width: 100%;
+			}
+			
+			
+			
+			#RightBottom{	
+				position: fixed;
+				right: 40px;
+				bottom: 30px;
+			}
+			#RightBottom .ErWeiMa{
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-image: url(../img/u=3523208342,4268724663&fm=26&gp=0.jpg);
+				background-repeat: no-repeat;
+				background-size: contain;
+				box-shadow: rgb(252,105,118) 0px 0px 3px;			
+			}
+			#RightBottom .HuiDaoTop{
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-image: url(../img/huidaodingbu.png);
+				background-repeat: no-repeat;
+				background-size: contain;
+				box-shadow: rgb(252,105,118) 0px 0px 3px;			
+			}
+			#RightBottom .tupiao{
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-color: white;
+				background-image: url(../img/u=1667993483,1572971842&fm=26&gp=0.jpg);
+				background-repeat: no-repeat;
+				background-size: contain;
+			}
+			#RightBottom .toggles{
+				width: 150px;
+				height: 150px;
+				box-shadow: rgb(252,105,118) 0px 0px 10px;
+				background-image: url(../img/qr-code.png);
+				background-repeat: no-repeat;
+				background-size: contain;
+				position: fixed;
+				right: 100px;
+				bottom: 30px;
+			}
