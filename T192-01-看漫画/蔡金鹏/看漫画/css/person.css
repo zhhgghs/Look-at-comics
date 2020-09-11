@@ -51,6 +51,10 @@
 	text-decoration: none;
 	color: rgb(252, 105, 118);
 }
+#nav>li>a:focus{
+	text-decoration: none;
+	color: rgb(252, 105, 118);
+}
 #nav>p>a{
 	display: inline-block;
 	padding: 10px 22px;
@@ -69,4 +73,137 @@
 	float: left;
 	margin-left: 35%;
 	margin-right: 2%;
+}
+#wave{
+	margin-top: 1.5%;
+	margin-bottom: 3%;
+}
+#wave>img{
+	width: 100%;
+}
+.row>div:nth-of-type(2)>div{
+	background: url(../img/person/2.jpg) no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.row>div:nth-of-type(3)>div{
+	background: url(../img/person/3.jpg) no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.row>div:nth-of-type(4)>div{
+	background: url(../img/person/4.jpg) no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.master>div:hover{
+	transition: all .5s;
+	box-shadow: 0px 0px 8px rgb(255, 181, 195);
+}
+.master>div>img{
+	margin-top: 75%;
+}
+.master>div>h4{
+	background-color: rgb(255, 255, 255);
+	margin: 0px;
+	padding: 10px 0px;
+	padding-left: 4.5%;
+	border: 1px solid rgb(245, 245, 245);
+	border-top: 0px;
+	border-bottom: 0px;
+}
+.master>div>p{
+	font-family: "微软雅黑";
+	background-color: rgb(255, 255, 255);
+	padding: 0px 15px;
+	border: 1px solid rgb(245, 245, 245);
+	border-top: 0px;
+}
+.master>div>p>samp{
+	display: inline-block;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin-top: 5%;
+	margin-bottom: 4%;
+}
+.master>div>p>samp>a{
+	color: rgb(255, 181, 199);
+}
+.master>div>p>samp>a:hover{
+	color: rgb(252, 105, 118);
+	text-decoration: none;
+}
+.master>div>p>samp>a:focus{
+	text-decoration: none;
+}
+.left-bottom{
+	position: relative;
+	margin-top: 2%;
+}
+.left-bottom>img{
+	float: left;
+	width: 180px;
+	height: 250px;
+	margin-right: 2%;
+}
+.left-bottom>img:hover{
+	transition:all .2s;
+	box-shadow: #ccc 0px 10px 10px;
+	transform: scale(1.01);	
+}
+.left-bottom>p{
+	font-family: "微软雅黑";
+}
+.left-bottom>p>samp{
+	font-family: "微软雅黑";
+	font-size: 12px;
+	position: absolute;
+	bottom: 12px;
+}
+.left-bottom>p>samp>a:hover{
+	color: rgb(252, 105, 118);
+	text-decoration: none;
+}
+.left-bottom>p>samp>a:focus{
+	text-decoration: none;
+}
+.left-bottom>p>samp>a{
+	color: rgb(255, 181, 199);
+}
+.more{
+	margin-top: 6020px;
+}
+.more .blank{
+    height: 32px;
+    box-shadow: 0 6px 6px 0 #FFF4F4;
+}
+.more .btn{
+    margin-left: 40%;
+    width: 200px;
+    height: 32px;
+    line-height: 32px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 6px 6px 2px #FFF4F4;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+    position: relative;
+    background-color: #ffffff;
+}
+.more .btn a{
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    color: #9D9D9D;
+    background-color: transparent;
+    text-align: center;
+    margin-left: 6%;
+}
+.more .btn a:hover{
+	color: rgb(252, 105, 118);
+}
+.more .btn a>span{
+	margin-left: 8%;
 }
