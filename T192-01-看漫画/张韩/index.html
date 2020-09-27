@@ -1,410 +1,540 @@
 <!DOCTYPE html>
-<html >
+<html>
 	<head>
 		<meta charset="utf-8">
 		<title>看漫画</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/index.css"/>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
 		<script src="navigationBar/vue.min.js"></script>
-			<script src="./navigationBar/navigationBar.js"></script>
-			<link rel="stylesheet" href="navigationBar/navigation.css"/>
+		<script src="./navigationBar/navigationBar.js"></script>
+		<link rel="stylesheet" href="navigationBar/navigation.css" />
 	</head>
-	<body style="position: static;width: 100%;">
-	<!-- 导航栏 -->
+	<body style="position: inherit;width: 100%;">
+		<!-- 导航栏 -->
 		<div id="navigationBar">
-			<navigation-bar></navigation-bar>
+			<!-- <navigation-bar></navigation-bar> -->
+			<div id="navigations" style="z-index: 999;">
+				<div id="navigationBarImg">
+					<img src="./navigationBar/img/logo-kmh.png" />
+				</div>
+				<div id="navigationBarText">
+					<span><a href='#'>首页</a></span>
+					<span><a href='#'>更新</a></span>
+					<span><a href='#'>排行</a></span>
+					<span><a href='#'>分类</a></span>
+					<span><a href='#'>资讯</a></span>
+				</div>
+				<div id="navigationBarInput">
+					<input type="text" /><button><img src="./navigationBar/img/QQ截图20200908215548.png" /></button>
+				</div>
+				<div id="navigationBarUser">
+					<!-- 头像弹窗 -->
+					<div @mouseenter="hover(true,0)" @mouseleave="hover(false,0)" class="show—tanChuang">
+						<a href="#">
+							<img style="margin-left: 0px;" id="navigationBarUser-userImg" :src="user.imgSrc">
+						</a>
+						<div class="show—tanChuang-div" :style="popupOneStype">
+							<img class="show—tanChuang-div-img" style="position: inherit; z-index: -1;" src="navigationBar/img/bg-cat-main.png" />
+							<div id="navigationBar-user-in" class="navigationBar-user-body">
+								<p style="text-align: center;margin:20px 0px 10px 0px ;">{{user.name}}</p>
+								<div style="font-size: 14px;">
+									<div><img src="navigationBar/img/popup/gold.png" />钻石&nbsp;&nbsp;{{user.diamonds}}</div>
+									<div><img src="navigationBar/img/popup/coins.png" />金币&nbsp;&nbsp;{{user.goldsCoin}}</div>
+									<div><img src="navigationBar/img/popup/ticket.png" />月票&nbsp;&nbsp;{{user.monthly}}</div>
+									<div><img src="navigationBar/img/popup/recommend.png" />推荐&nbsp;&nbsp;{{user.recommend}}</div>
+								</div>
+								<div style="text-align: center;">
+									<button id="navigationBar-sign" v-show="!user.sign">登录</button>
+									<button id="navigationBar-sign-bey" v-show="user.sign">退出登录</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="navigationBarUser-text">
+						<div @mouseenter="hover(true,1)" @mouseleave="hover(false,1)" class="show—tanChuang">
+							<!-- 书架弹窗 -->
+							<a href="#" style="padding: 50px 0px;">书架</a>
+							<div class="show—tanChuang-div" :style="popupTwoerStype">
+								<img class="show—tanChuang-div-img" style="position: inherit; z-index: -1;" src="navigationBar/img/bg-cat-main.png" />
+								<div class="navigationBar-user-body">
+									<div v-show="isBooks" style="color: #b3b3b3;font-size: 12px;">
+										<img style="width: 150px; height: 150px; margin-left: 50px;display: block;" src="navigationBar/img/mascot-fish.png" /><br />
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+										主人,不收藏漫画怎么追更呢~
+										<br />
+										&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+										<a style="color: #ff79ad;font-size: 14px;">去找找漫画吧!</a>
+										<br /> <br />
+									</div>
+									<div v-show="!isBooks">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 历史弹窗 -->
+						<div @mouseenter="hover(true,2)" @mouseleave="hover(false,2)" class="show—tanChuang">
+							<a href="#" style="padding: 50px 0px;">历史</a>
+							<div class="show—tanChuang-div" :style="popupSiriyStype">
+								<img class="show—tanChuang-div-img" style="position: inherit; z-index: -1;" src="navigationBar/img/bg-cat-main.png" />
+								<div class="navigationBar-user-body">
+									<div v-show="isLook" style="color: #b3b3b3;font-size: 12px;">
+										<img style="width: 150px; height: 150px; margin-left: 50px;display: block;" src="navigationBar/img/mascot-fish.png" /><br />
+
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+										呜呜~主人都没有阅读过漫画诶~
+										<br /> <br />
+									</div>
+									<div v-show="!isLook">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<span id="navigationBarUser-text-span"><a href=""><span></span>下载app</a></span>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- 轮播图 -->
-		<div style="margin-top: 70px;" id="rotation" class="textFrot" >
-			<div id="rotation-ul">
-				<ul style="padding-left: 20px;">
-					<li @mouseover="" v-for="txt in text">
-						<div id="rotation-ul-div">
-							<a style="font-size: 14px;" :href="txt.href">{{txt.key}}<br/>
-								<span style="font-size: 12px;">{{txt.value}}</span>
-							</a>
-						</div>
-					</li>
-				</ul>
+		<div style="margin-top: 71px;" id="rotation" :style='indexImg' class="textFrot">
+			<div style="width: 1200px;margin:0 auto;">
+				<div class="rotation-ul">
+					<ul style="	padding-left: 20px;">
+						<li v-for="(txt,index) in text" :key='index'>
+							<div @mouseenter="liClick(index)" @click="liClick(index)" :style="rotationHeight(index)" :class="classRotation(index)">
+								<a style="font-size: 14px;" :href="txt.href">{{txt.key}}<br />
+									<span style="font-size: 12px;">{{txt.value}}</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<!-- 中间部分 -->
-		<div id="lookBody" style=" width: 1200px;margin:0 auto;border: red 1px solid;margin-top: 30px;">
-				<!-- 全部分类 -->
-				<div id="textType" class="aType-red">
-					<div class="xiaoshiTu">
-						<img style="margin-left: -130px;" src="img/home/home.d768d.png" />
-					</div>
-					<div >
-						<a href="#">完结</a>
-						<a href="#">连载</a>
-					</div>
-					<div class="xiaoshiTu" style="margin-left: 10px;">
-						<img style="width: 100px;width: 150px;"  src="img/home/home.d768d.png" />
-					</div>
-					<div >
-						<a href="#">热血</a> <a href="#">恋爱</a> <a href="#">玄幻</a> <a href="#">神魔</a>
-						<a href="#">都市</a>	<a href="#">霸总</a> <a href="#">穿越</a> <a href="#">搞笑</a>
-						<a href="#">冒险</a> <a href="#">古风</a> <a href="#">生活</a>	<a href="#">竞技</a>
-						<a href="#">动作</a>	<a href="#">悬疑</a>	<a href="#">武侠</a>	<a href="#">科幻</a>
-						<a href="#">恐怖</a>
-					</div>
-					<!-- 小火箭 -->
-					<div class="icon-fun">
-						<a href="#">全部</a>
-						<div></div>
-					</div>
-				</div>	
-				<!-- 波浪图片 -->
-				<div id="lookBody-imger"></div>
-				<!-- 小编推荐 -->
-				<div id="tuiter">
-					<!-- 推荐 -->
-					<div class='imgText'>
-						<div >
-							<img style="margin-top: -50px;display: flex;" src="img/home/home.d768d.png" >
-						</div>
-						<span>&nbsp;小编推荐</span>
-					</div>
-					<!-- 推荐的小说 -->
-					<div>
-						<ul style="padding-left: 0px;">
-							<li class="bookType" v-for="txt in texts">
-								<a :href="txt.href">
-									<div class="bookType-new">
-										<div class="bookType-img">
-											<img :src="txt.img" >
-										</div>
-										<div class="bookType-text">
-											<div style="margin-top: 10px;margin-bottom: 5px;">
-												<a :href="txt.href"> {{txt.name}}</a>
-												<span class="bookType-text-span" style="font-size: 18px;">{{txt.fraction}}</span>
-											</div>
-											<span class="ontTxt-show" style="width: 200px;display: inline-block;font-size: 12px;color: rgb(153,153,153);">{{txt.brief}}</span>
-										</div>
-									</div>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<!-- 推荐的小说代码完结 -->
+		<div id="lookBody" style=" width: 1200px;margin:0 auto;margin-top: 30px;">
+			<!-- 全部分类 -->
+			<div id="textType" class="aType-red">
+				<div class="xiaoshiTu">
+					<img style="margin-left: -130px;" src="img/home/home.d768d.png" />
 				</div>
-				<div id="mei">
-					<!-- 每日更新 -->
-					<div class='imgText'>
-						<div >
-							<img style="margin-left: -45px;margin-top: -5px;" src="img/home/home.d768d.png" >
-						</div>
-						<span>&nbsp;每日更新</span>
-					</div>
-					<!-- 推荐的小说 -->
-					<div>
-						<ul style="padding-left: 0px;">
-							<li class="bookType" v-for="txt in texts">
-								<a :href="txt.href">
-									<div class="bookType-new">
-										<div class="bookType-img">
-											<img :src="txt.img" >
-										</div>
-										<div class="bookType-text">
-											<div style="margin-top: 10px;margin-bottom: 5px;">
-												<a :href="txt.href"> {{txt.name}}</a>
-												<span class="bookType-text-span" style="font-size: 18px;">{{txt.fraction}}</span>
-											</div>
-											<span class="ontTxt-show" style="width: 200px;display: block;font-size: 12px;color: rgb(153,153,153);">{{txt.brief}}</span>
-										</div>
-									</div>
-								</a>
-							</li>
-						</ul>
-					</div>
+				<div>
+					<a href="#">完结</a>
+					<a href="#">连载</a>
 				</div>
+				<div class="xiaoshiTu" style="margin-left: 10px;">
+					<img style="width: 100px;width: 150px;" src="img/home/home.d768d.png" />
+				</div>
+				<div>
+					<a href="#">热血</a> <a href="#">恋爱</a> <a href="#">玄幻</a> <a href="#">神魔</a>
+					<a href="#">都市</a> <a href="#">霸总</a> <a href="#">穿越</a> <a href="#">搞笑</a>
+					<a href="#">冒险</a> <a href="#">古风</a> <a href="#">生活</a> <a href="#">竞技</a>
+					<a href="#">动作</a> <a href="#">悬疑</a> <a href="#">武侠</a> <a href="#">科幻</a>
+					<a href="#">恐怖</a>
+				</div>
+				<!-- 小火箭 -->
+				<div class="icon-fun">
+					<a href="#">全部 >>
+					</a>
+
+				</div>
+			</div>
+			<!-- 波浪图片 -->
+			<div id="lookBody-imger" style="width: 1200px;"></div>
+			<!-- 小编推荐 -->
+			<div id="tuiter">
+				<!-- 推荐 -->
+				<div class='imgText'>
+					<div>
+						<img style="margin-top: -50px;display: flex;" src="img/home/home.d768d.png">
+					</div>
+					<span>&nbsp;小编推荐</span>
+				</div>
+				<!-- 推荐的小说 -->
+				<div>
+					<ul style="padding-left: 0px;">
+						<li class="bookType" v-for="txt in texts">
+							<a :href="txt.href">
+								<div class="bookType-new">
+									<div class="bookType-img">
+										<img :src="txt.img">
+									</div>
+									<div class="bookType-text">
+										<div style="margin-top: 10px;margin-bottom: 5px;">
+											<a :href="txt.href"> {{txt.name}}</a>
+											<span class="bookType-text-span" style="font-size: 18px;">{{txt.fraction}}</span>
+										</div>
+										<span class="ontTxt-show" style="width: 200px;display: inline-block;font-size: 12px;color: rgb(153,153,153);">{{txt.brief}}</span>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- 推荐的小说代码完结 -->
+			</div>
+			<div id="mei">
+				<!-- 每日更新 -->
+				<div class='imgText'>
+					<div>
+						<img style="margin-left: -45px;margin-top: -5px;" src="img/home/home.d768d.png">
+					</div>
+					<span>&nbsp;每日更新</span>
+				</div>
+				<!-- 每日更新的小说 -->
+				<div>
+					<ul style="padding-left: 0px;">
+						<li class="bookType" v-for="txt in texts">
+							<a :href="txt.href">
+								<div class="bookType-new">
+									<div class="bookType-img">
+										<img :src="txt.img">
+									</div>
+									<div class="bookType-text">
+										<div style="margin-top: 10px;margin-bottom: 5px;">
+											<a :href="txt.href"> {{txt.name}}</a>
+											<span class="bookType-text-span" style="font-size: 18px;">{{txt.fraction}}</span>
+										</div>
+										<span class="ontTxt-show" style="width: 200px;display: block;font-size: 12px;color: rgb(153,153,153);">{{txt.brief}}</span>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- 推荐链接 -->
+			<div class='imgText'>
+				<div>
+					<img style="margin-top: -90px;" src="img/home/home.d768d.png">
+				</div>
+				<span>&nbsp;推荐链接</span>
+			</div>
+			<div style="margin-left: 10px;" id="navigationBar-lianjei-text">
+				<a>蜻蜓有声小说</a> <a>斗罗大陆漫画</a> <a>品牌排行榜</a> <a>爱优漫</a> <a>雅图在线</a> <a>摔角网</a>
+				<a>在职研究生报考条件</a> <a>壁纸族</a> <a>漫画大全</a> <a>挽回爱情</a> <a>法律快车网</a> <a>看漫画</a>
+				<a>搜好货网</a> <a>股城财经</a> <a>魔域</a> <a>悦美整形</a> <a>极速动漫</a> <a>动漫屋</a>
+				<a>当游网</a> <a>动漫网</a> <a>中国地图</a> <a>街机游戏</a> <a>龙符之王道天下</a> <a>爱问共享资料</a>
+				<a>英雄联盟</a> <a>哑舍</a> <a>信用卡论坛</a> <a>发型</a> <a>综艺巴士</a> <a>风度男人网</a>
+				<a>斗破苍穹漫画</a> <a>神漫画</a> <a>看漫画</a> <a>凯漫画</a> <a>搞笑图片</a> <a>句子迷</a>
+			</div>
+
+			<div id="navigationBar-borttm" style="font-size: 12px;" style="text-align: center;">
+				<img src="img/star-tree.gif" style="margin-left: 550px; display: block;width: 100px; height: 100px;">
+
+				<div style="text-align: center;">
+					<a>关于看漫</a> <a>网站地图</a> <a>网站地图</a> <a>法律声明</a> <a>加入我们</a><br />
+					<a>版权合作</a> <a>投稿指南</a> <a>用户协议</a><br />
+					<a>下载客户端</a> <a>关注微博</a> <a>关注微信</a> <a>小程序</a><br />
+					电话：400-616-1961 QQ：4006161961
+					QQ群：724607947 邮箱：kefu@xiaomingtaiji.com<br />
+					<div style="border:#f7a1b5 1px dotted;margin: 30px 0px;"></div>
+					<p style="color: #b4b4b4;display: inline-block;">
+						鄂ICP备20007481号-1 | 鄂网文（2020）2367-090号<br />
+						公司地址: 湖北省鄂州市葛店开发区葛店镇罗庄村、秋千村光谷联合科技城D3-1号1层101室<br />
+						Copyright © 鄂州看漫画动漫有限公司　版权所有 <a style="color: #000000;">纠纷处理　自审制度</a> </p>
+					　<br />
+					<br />
+					<br />
+				</div>
+			</div>
+
 		</div>
+sudo apt-get install build-essential
 		<script type="text/javascript">
-			new Vue({//new一个vue匿名对象
-				el: '#mei',//选择器
-				data:{//数据属性
-					texts:[
-						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+			new Vue({ //new一个vue匿名对象
+				el: '#mei', //选择器
+				data: { //数据属性
+					texts: [{
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						}
 					]
 				},
-				computed:{//计算属性
-					
+				computed: { //计算属性
+
 				},
-				methods:{//方法
-					
+				methods: { //方法
+
 				},
-				fliters:{//过滤器
-					
+				fliters: { //过滤器
+
 				},
-				components:{//组件注册
-					
+				components: { //组件注册
+
 				}
 			})
-			new Vue({//new一个vue匿名对象
-				el: '#lookBody',//选择器
-				data:{//数据属性
-					texts:[
-						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+			new Vue({ //new一个vue匿名对象
+				el: '#lookBody', //选择器
+				data: { //数据属性
+					texts: [{
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						},
 						{
-							name:'站道成神',//小说名
-							img:'img/108349.jpg-300x400.webp',//地址
+							name: '站道成神', //小说名
+							img: 'img/108349.jpg-300x400.webp', //地址
 							//简介
-							brief:`这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
-							type:['古风','玄幻','热血'],//便签
-							fraction:'4.5',//评分
-							newBook:'第十一章:带回家开发',//最新章节
-							href:'#'//链接地址
+							brief: `这一世，叶东风打造完美道心，他微末起身，以凛然之资横推天下，翻手为云，覆手雨，以一己之力脚踏四方，镇压当代。上一世的遗憾和不甘尽数抹平，名震太古，以战为道，终成圣主`,
+							type: ['古风', '玄幻', '热血'], //便签
+							fraction: '4.5', //评分
+							newBook: '第十一章:带回家开发', //最新章节
+							href: '#' //链接地址
 						}
 					]
 				},
-				computed:{//计算属性
-					
+				computed: { //计算属性
+
 				},
-				methods:{//方法
-					
+				methods: { //方法
+
 				},
-				fliters:{//过滤器
-					
+				fliters: { //过滤器
+
 				},
-				components:{//组件注册
-					
+				components: { //组件注册
+
 				}
 			})
-			new Vue({//new一个vue匿名对象
-				el: '#rotation',//选择器
-				data:{//数据属性
-					text:[
-						{
-							key:"斗破长囧",
-							value:"小家",
-							href:'https://www.kanman.com/108234/',
-							isShow:false
+			new Vue({ //new一个vue匿名对象
+				el: '#rotation', //选择器
+				data: { //数据属性
+					clickIndex: 0,
+
+					text: [{
+							key: "斗破长囧",
+							value: "小家",
+							href: 'https://www.kanman.com/108234/',
+							img: '//cms.samanlehua.com/cms/chendan/b841b6c0-e855-11ea-8ac2-b570955ebea1.png-noresize.webp'
 						},
 						{
-							key:"斗破长囧",
-							value:"小家",
-							href:'https://www.kanman.com/108234/',
-							isShow:false
+							key: "斗破长囧",
+							value: "小家",
+							href: 'https://www.kanman.com/108234/',
+							img: '//image.yqmh.com/mh/108349.jpg-300x400.webp'
 						},
 						{
-							key:"斗破长囧",
-							value:"小家",
-							href:'https://www.kanman.com/108234/',
-							isShow:false
+							key: "斗破长囧",
+							value: "小家",
+							href: 'https://www.kanman.com/108234/',
+							img: '//cms.samanlehua.com/cms/chendan/b841b6c0-e855-11ea-8ac2-b570955ebea1.png-noresize.webp'
 						},
 						{
-							key:"斗破长囧",
-							value:"小家",
-							href:'https://www.kanman.com/108234/',
-							isShow:false
+							key: "斗破长囧",
+							value: "小家",
+							href: 'https://www.kanman.com/108234/',
+							img: '//cms.samanlehua.com/cms/chendan/b841b6c0-e855-11ea-8ac2-b570955ebea1.png-noresize.webp'
 						},
-					{
-						key:"斗破长囧",
-						value:"小家",
-						href:'https://www.kanman.com/108234/',
-						isShow:false
-					},
-					{
-						key:"斗破长囧",
-						value:"小家",
-						href:'https://www.kanman.com/108234/',
-						isShow:false
-					},
-					{
-						key:"斗破长囧",
-						value:"小家",
-						href:'https://www.kanman.com/108234/',
-						isShow:false
-					},
+						{
+							key: "斗破长囧",
+							value: "小家",
+							href: 'https://www.kanman.com/108234/',
+							img: 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1830914723,3154965800&fm=26&gp=0.jpg'
+						},
+						{
+							key: "斗破长囧",
+							value: "小家",
+							href: 'https://www.kanman.com/108234/',
+							img: 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg'
+						},
 					]
 				},
-				computed:{//计算属性
-					
-				},
-				methods:{//方法
-					show(){
-						return true
+				computed: { //计算属性
+					indexImg() {
+						return 'background-image: url(' + this.text[this.clickIndex].img + ')';
 					},
-					noShow(){
-						return false
+					classRotation() {
+						return 'rotation-ul-div-class'
 					}
 				},
-				fliters:{//过滤器
-					
+				methods: { //方法
+					classRotation(index) {
+						if (index != this.clickIndex) {
+							return "";
+						} else {
+							return 'rotation-ul-div-class'
+						}
+
+					},
+					rotationHeight(index) {
+						if (index != this.clickIndex) {
+							return "";
+						} else {
+							return "height: 40px;";
+						}
+					},
+					liClick(index) {
+						this.clickIndex = index;
+					}
 				},
-				components:{//组件注册
-					
+				fliters: { //过滤器
+
+				},
+				components: { //组件注册
+
 				}
 			})
 			navigationBar()

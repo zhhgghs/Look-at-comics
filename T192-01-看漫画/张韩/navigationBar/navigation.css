@@ -21,27 +21,34 @@
 					  border: none;
 				}
 #navigationBar{
+	display: block;
 	position: fixed;
+	float: left;
+	z-index: 999;
 	top: 0px;
 	width: 100%;
-	height: 70px;
-	background-color: #fdfdfd;
+	height: 75px;
+	background-color: #fafafa;
+	border-bottom: rgba(252, 194, 207, 0.5) 2px solid ;
 }
 #navigations a:hover{
-		color:rgba(252,105,118);
+		color:rgba(252,105,118,0.5);
 }
 #navigations a{
 		color: #8d8d8d;
 		font-size: 18px;
 }
 #navigations{
-	padding-top: 10px;
+	display: block;
+	padding-top: 5px;
 	width: 1200px;
 	height: 70px;
-	position: inherit;
+	position: absolute;
+	float: left;
 	left: 50%;
 	margin-left: -600px;
-	background-color: #fdfdfd;
+	background-color: #fafafa;
+	z-index: 99999999;
 }
 #navigationBar div{
 	display: inline-block;
@@ -59,8 +66,6 @@
 }
 #navigationBarInput{
 	margin-left:100px ;
-
-
 }
 #navigationBarInput button{
 	border-radius: 0px 30px 30px 0px;
@@ -71,21 +76,24 @@
 }
 #navigationBarInput input{
 	background-color: #FFE1E6;
-		border-radius: 30px 0px 0px 30px;
-		border: #FFD1D8 1px solid;
+	border-radius: 30px 0px 0px 30px;
+	border: #FFD1D8 1px solid;
 	height: 35px;
 	width: 280px;
 	padding-left: 10px;
-	margin-top: 10px;
 	color: #ff85c0;
 	font-size: 16px;
+	vertical-align: middle;
 }
 #navigationBarUser-text a{
 	color: #2d2d2d;
 	font-size: 14px;
 	margin-left: 10px;
+	position: inherit;
 }
 #navigationBarUser{
+	position: inherit;
+	margin-top: 10px;
 	margin-left: 50px;
 }
 #navigationBarUser-text-span span{
@@ -101,4 +109,79 @@
 }
 #navigationBar	img{
 			vertical-align:middle;
-		}
+}
+#navigationBarUser-text{
+	position: fixed;
+	width: 200px;
+	top: 25px;
+	right: 65px;
+}
+/* 弹窗 */
+
+.show—tanChuang .show—tanChuang-div{
+	width: 250px;
+	height: 100px;
+	position: fixed;
+	top: 110px;
+	right: 155px;
+	z-index: -1;
+}
+.show—tanChuang:hover #navigationBarUser-userImg{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	position: fixed;
+	top: 40px;
+	
+	
+}
+.show—tanChuang div .show—tanChuang-div-img{
+	width: 270px;
+	margin-left: -10px;
+	height: 80px;
+	margin-top: -50px;
+
+}
+.navigationBar-user-body{
+	width: 250px;
+	height: auto;
+	background-color: #F7F7F7;
+	position: inherit;
+	border-top:rgba(255, 205, 215, 1.0) 2px solid;
+	border-left:rgba(255, 205, 215, 0.5) 2px solid;
+	border-right:rgba(255, 205, 215, 0.5) 2px solid;
+	border-bottom:rgba(255, 205, 215, 0.3) 2px solid;
+}
+#navigationBar-user-in img{
+	vertical-align:middle;
+	margin: 0px;
+	width: 30px;
+	height: 30px;
+}
+#navigationBar-user-in div div{
+	width: 100px;
+	display: inline-block;
+	margin-left: 20px;
+}
+#navigationBar-sign{
+	width: 150px;
+	height: 30px;
+	border-radius:30px ;
+	background-color:rgba(255, 90, 112, 0.8) ;
+	margin: 30px 50px;
+	color: #FFE1E6;
+}
+#navigationBar-sign:hover{
+	background-color:rgba(255, 90, 112, 1) ;
+}
+#navigationBar-sign-bey:hover{
+	background-color:rgba(255, 90, 112, 1) ;
+}
+#navigationBar-sign-bey{
+	width: 150px;
+	height: 30px;
+	border-radius:30px ;
+	background-color:rgba(255, 157, 188, 0.8) ;
+	margin: 30px 50px;
+	color: #FFE1E6;
+}

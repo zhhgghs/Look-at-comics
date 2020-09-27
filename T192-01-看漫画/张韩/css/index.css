@@ -1,7 +1,7 @@
 
 
 #rotation{
-
+	margin-top: 70px;
 	/* 超出边框不显示 */
 	overflow-y: hidden;
 	margin-top: 10px;
@@ -12,10 +12,10 @@
 	/* border-radius: 0px 0px 40px 40px; */
 }
 
-#rotation-ul{
+.rotation-ul{
 
 	display: inline-block;
-	background-color: rgba(12, 12, 12, 0.8);
+	background-color: rgba(3, 3, 3, 0.8);
 	width: 240px;
 	height: 250px;
 	float: right;
@@ -24,20 +24,26 @@
 	padding-bottom: 20px;
 }
 
-#rotation-ul  a{
+.rotation-ul  a{
 		color: #FFFFFF;
 }
-#rotation-ul  li:hover a{
-	color:rgba(252,105,118);
+.rotation-ul  li:hover a{
+
 }
-#rotation-ul-div{
+.rotation-ul  li div{
 	overflow-y: hidden;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	height: 20px;
 }
-#rotation-ul-div:hover{
+.rotation-ul-div-class{
 	height: 40px;
+}
+.rotation-ul-div-class  a{
+		color:rgba(252,105,118);
+}
+.rotation-ul-div-class span{
+			color:rgba(252,105,118);
 }
 #rotation img{
 	width: 250px;
@@ -59,7 +65,7 @@
 #textType{
 	display: block;
 	height: 50px;
-	font-size: 18px;
+	font-size: 16px;
 	z-index: -1;
 }
 .aType-red a:hover{
@@ -69,23 +75,13 @@
 	margin-left: 10px;
 }
 .icon-fun{
-	
+
 	float: right;
 }
 .icon-fun a{
 	color: rgb(165, 165, 165);
 }
-.icon-fun div{
-	width: 40px;
-	height: 40px;
-	background-image: url(../img/home/icon/icon-1.png);
-	transform: rotate(90deg);
-	background-size: contain;
-	vertical-align:middle;
-}
-.icon-fun:hover div{
-	background-image: url(../img/home/icon/icon-3.png);
-}
+
 .icon-fun:hover a{
 	color:rgba(252,105,118);
 }
@@ -151,13 +147,17 @@
 	margin-right: 7px;
 }
 
-/* .bookType:hover .bookType-show{
-	display:initial;
+#navigationBar-borttm a:hover{
+
+	color: #da4f70;
 }
-.bookType-show{
-	display: none;
-	width: 240px;
-	height: 360px;
-	float: left;
-	background-color: #000000;
-} */
+#navigationBar-lianjei-text a{
+	color: #a1a1a1;
+	font-size: 16px;
+	width: 190px;
+	height: 40px;
+	display: inline-block;
+}
+#navigationBar-lianjei-text a:hover{
+	color: #da4f70;
+}
